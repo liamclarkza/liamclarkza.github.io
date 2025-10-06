@@ -1,0 +1,12 @@
+name = "Personal"
+license = "MIT"
+licenselink = "https://github.com/yourname/personal-theme/blob/main/LICENSE"
+description = "A simple personal blog theme"
+homepage = "https://github.com/yourname/personal-theme"
+tags = ["blog", "personal", "minimal"]
+features = ["blog", "responsive"]
+min_version = "0.41.0"
+
+[author]
+  name = "Liam Clark"
+  homepage = "https://liamjamesclark.com"

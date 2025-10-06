@@ -1,0 +1,4 @@
+baseURL = 'https://liamjamesclark.com/'
+languageCode = 'en-gb'
+title = 'Liam Clark'
+theme = 'personal'

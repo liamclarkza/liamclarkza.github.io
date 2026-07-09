@@ -1,0 +1,28 @@
+{{ define "main" }}
+  <article class="resume shell">
+    <header class="resume-header">
+      <div>
+        <p class="eyebrow">Web résumé</p>
+        <h1>{{ .Title }}</h1>
+        <p>{{ .Description }}</p>
+      </div>
+      <button class="button button-secondary print-button" type="button" onclick="window.print()">Print / save PDF</button>
+    </header>
+    <div class="resume-layout">
+      <aside class="resume-aside">
+        <div>
+          <p class="panel-label">Based in</p>
+          <p>South Africa</p>
+        </div>
+        <div>
+          <p class="panel-label">Online</p>
+          <a href="{{ site.Params.github }}">github.com/liamclarkza</a>
+        </div>
+        <p class="resume-note">This foundation is ready for your full work history, education, skills, and contact details.</p>
+      </aside>
+      <div class="prose resume-content">
+        {{ .Content }}
+      </div>
+    </div>
+  </article>
+{{ end }}

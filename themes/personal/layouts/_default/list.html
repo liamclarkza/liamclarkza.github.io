@@ -1,28 +1,32 @@
 {{ define "main" }}
-<div class="blog-header">
-    <h1 class="blog-title">{{ .Title }}</h1>
-    {{ if .Content }}
-    <p class="blog-subtitle">{{ .Content | plainify }}</p>
-    {{ end }}
-</div>
+  <header class="page-header shell">
+    <p class="eyebrow">{{ if eq .Section "projects" }}The work{{ else }}The notebook{{ end }}</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </header>
 
-{{ if .Data.Pages }}
-<ul class="blog-posts">
-    {{ range .Data.Pages }}
-    <li class="blog-post-item" onclick="window.location.href='{{ .Permalink }}'">
-        <div class="post-date">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2 '06" }}</time>
+  <section class="section shell section-first">
+    <div class="card-grid">
+      {{ range .Pages.ByWeight }}
+        <article class="project-card">
+          <div class="card-topline">
+            <span class="badge">{{ .Params.status | default (time.Format "2 Jan 2006" .Date) }}</span>
+          </div>
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p>{{ .Params.summary | default .Summary }}</p>
+          {{ with .Params.tags }}
+            <ul class="tag-list" aria-label="Topics">
+              {{ range . }}<li>{{ . }}</li>{{ end }}
+            </ul>
+          {{ end }}
+          <a class="card-link" href="{{ .RelPermalink }}">Read more <span aria-hidden="true">→</span></a>
+        </article>
+      {{ else }}
+        <div class="empty-card">
+          <h2>Quiet for now.</h2>
+          <p>This section is ready; the first entry will appear here when it’s ready to share.</p>
         </div>
-        <div class="post-content">
-            <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-            {{ if .Params.description }}
-            <p class="post-description">{{ .Params.description }}</p>
-            {{ end }}
-        </div>
-    </li>
-    {{ end }}
-</ul>
-{{ else }}
-<p>No posts yet.</p>
-{{ end }}
+      {{ end }}
+    </div>
+  </section>
 {{ end }}

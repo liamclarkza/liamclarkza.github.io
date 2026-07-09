@@ -1,14 +1,21 @@
 {{ define "main" }}
-<article>
-    <header>
-        <h1>{{ .Title }}</h1>
-        <div class="meta">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
-        </div>
+  <article class="article shell">
+    <a class="back-link" href="{{ .Parent.RelPermalink }}"><span aria-hidden="true">←</span> Back to {{ .Parent.Title | lower }}</a>
+    <header class="article-header">
+      {{ with .Params.status }}<span class="badge">{{ . }}</span>{{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+      {{ with .Params.tags }}
+        <ul class="tag-list" aria-label="Topics">
+          {{ range . }}<li>{{ . }}</li>{{ end }}
+        </ul>
+      {{ end }}
     </header>
-
-    <div class="content">
-        {{ .Content }}
+    <div class="prose">
+      {{ .Content }}
     </div>
-</article>
+    {{ with .Params.externalURL }}
+      <a class="button button-primary" href="{{ . }}">Visit project <span aria-hidden="true">↗</span></a>
+    {{ end }}
+  </article>
 {{ end }}

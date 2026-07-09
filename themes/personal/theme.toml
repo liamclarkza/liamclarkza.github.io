@@ -1,11 +1,7 @@
 name = "Personal"
 license = "MIT"
-licenselink = "https://github.com/yourname/personal-theme/blob/main/LICENSE"
-description = "A simple personal blog theme"
-homepage = "https://github.com/yourname/personal-theme"
-tags = ["blog", "personal", "minimal"]
-features = ["blog", "responsive"]
-min_version = "0.41.0"
+description = "A soft, minimal portfolio theme for Liam Clark."
+min_version = "0.120.0"
 
 [author]
   name = "Liam Clark"

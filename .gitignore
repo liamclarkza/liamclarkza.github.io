@@ -36,3 +36,7 @@ yarn-error.log*
 
 # Log files
 *.log
+.DS_Store
+.hugo_build.lock
+public/
+resources/_gen/

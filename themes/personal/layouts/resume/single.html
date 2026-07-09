@@ -8,20 +8,81 @@
       </div>
       <button class="button button-secondary print-button" type="button" onclick="window.print()">Print / save PDF</button>
     </header>
+
     <div class="resume-layout">
       <aside class="resume-aside">
         <div>
           <p class="panel-label">Based in</p>
-          <p>South Africa</p>
+          <p>{{ .Params.location }}</p>
         </div>
         <div>
           <p class="panel-label">Online</p>
-          <a href="{{ site.Params.github }}">github.com/liamclarkza</a>
+          <a href="{{ site.Params.github }}">GitHub</a>
+          <a href="{{ .Params.linkedin }}">LinkedIn</a>
         </div>
-        <p class="resume-note">This foundation is ready for your full work history, education, skills, and contact details.</p>
       </aside>
-      <div class="prose resume-content">
-        {{ .Content }}
+
+      <div class="resume-content">
+        <section class="resume-section resume-profile">
+          <h2>Profile</h2>
+          <div class="prose">{{ .Content }}</div>
+        </section>
+
+        <section class="resume-section">
+          <h2>Experience</h2>
+          <div class="resume-entries">
+            {{ range .Params.experience }}
+              <article class="resume-entry">
+                <header class="resume-entry-header">
+                  <div>
+                    <h3>{{ .role }}</h3>
+                    <p class="resume-company">{{ .company }}</p>
+                  </div>
+                  <div class="resume-meta">
+                    <span>{{ .dates }}</span>
+                    <span>{{ .location }}</span>
+                  </div>
+                </header>
+                <ul class="resume-bullets">
+                  {{ range .bullets }}<li>{{ . }}</li>{{ end }}
+                </ul>
+              </article>
+            {{ end }}
+          </div>
+        </section>
+
+        <section class="resume-section">
+          <h2>Skills</h2>
+          <div class="skill-groups">
+            {{ range .Params.skills }}
+              <div class="skill-group">
+                <h3>{{ .label }}</h3>
+                <p>{{ .items }}</p>
+              </div>
+            {{ end }}
+          </div>
+        </section>
+
+        <section class="resume-section">
+          <h2>Education</h2>
+          <div class="education-list">
+            {{ range .Params.education }}
+              <article class="education-entry">
+                <div>
+                  <h3>{{ .qualification }}</h3>
+                  <p>{{ .institution }}</p>
+                </div>
+                <span>{{ .dates }}</span>
+              </article>
+            {{ end }}
+          </div>
+          <div class="education-recognition">
+            <h3>Recognition</h3>
+            <ul class="recognition-list">
+              {{ range .Params.recognition }}<li>{{ . }}</li>{{ end }}
+            </ul>
+          </div>
+        </section>
       </div>
     </div>
   </article>

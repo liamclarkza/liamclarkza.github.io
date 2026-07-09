@@ -8,6 +8,7 @@ enableRobotsTXT = true
   author = "Liam Clark"
   description = "A home for Liam Clark's projects, notes, and experience."
   github = "https://github.com/liamclarkza"
+  linkedin = "https://www.linkedin.com/in/liamclarkza/"
 
 [permalinks]
   projects = "/projects/:slug/"

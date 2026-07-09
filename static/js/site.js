@@ -1,23 +1,6 @@
 (function () {
-  var root = document.documentElement;
-  var themeButton = document.querySelector('.theme-toggle');
   var menuButton = document.querySelector('.menu-toggle');
   var nav = document.querySelector('.site-nav');
-
-  function updateThemeLabel() {
-    if (!themeButton) return;
-    var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    themeButton.setAttribute('aria-label', 'Switch to ' + next + ' theme');
-  }
-
-  if (themeButton) {
-    updateThemeLabel();
-    themeButton.addEventListener('click', function () {
-      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('theme', root.dataset.theme);
-      updateThemeLabel();
-    });
-  }
 
   if (menuButton && nav) {
     menuButton.addEventListener('click', function () {

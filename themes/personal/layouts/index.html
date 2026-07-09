@@ -1,46 +1,47 @@
 {{ define "main" }}
-  <section class="home-hero surface-card">
-    <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Hello, I’m Liam</p>
-    <h1>A small home for things<br><span>I make and learn.</span></h1>
-    <p class="hero-intro">This is where I share personal projects, working notes, and a little about my experience. It’s an intentionally simple space that can grow over time.</p>
-    <div class="hero-actions">
-      <a class="button button-primary" href="{{ "projects/" | relURL }}">View projects <span aria-hidden="true">→</span></a>
-      <a class="button button-secondary" href="{{ "resume/" | relURL }}">View résumé</a>
+  <section class="home-hero">
+    <div class="home-hero-copy">
+      <h1>A small home for things<br><span>I make and learn.</span></h1>
+      <p class="hero-intro">This is where I share personal projects, working notes, and a little about my experience. It’s an intentionally simple space that can grow over time.</p>
+      <div class="hero-actions">
+        <a class="hero-link" href="{{ "projects/" | relURL }}">Explore projects <span aria-hidden="true">→</span></a>
+        <a class="hero-link" href="{{ "resume/" | relURL }}">Read my résumé <span aria-hidden="true">→</span></a>
+      </div>
     </div>
   </section>
 
-  <section class="home-grid" aria-label="Site sections">
+  <section class="home-feature" aria-labelledby="featured-project-heading">
+    <div class="home-section-heading">
+      <p id="featured-project-heading">Featured project</p>
+      <a href="{{ "projects/" | relURL }}">All projects <span aria-hidden="true">→</span></a>
+    </div>
     {{ $projects := where site.RegularPages "Section" "projects" }}
     {{ range first 1 $projects.ByWeight }}
-      <article class="home-card home-card-wide">
-        <div class="card-topline">
-          <p class="card-label">Current project</p>
-          <span class="badge">{{ .Params.status | default "Project" }}</span>
-        </div>
-        <div class="home-card-body">
+      <article class="featured-project">
+        <div>
+          <p class="featured-status">{{ .Params.status | default "Project" }}</p>
           <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
           <p>{{ .Params.summary | default .Summary }}</p>
         </div>
-        <a class="card-link" href="{{ .RelPermalink }}" aria-label="Read about {{ .Title }}">Project details <span aria-hidden="true">→</span></a>
+        <a class="featured-link" href="{{ .RelPermalink }}" aria-label="Read about {{ .Title }}">Project details <span aria-hidden="true">→</span></a>
       </article>
     {{ end }}
-
-    <article class="home-card">
-      <p class="card-label">Résumé</p>
-      <div class="home-card-body">
-        <h2><a href="{{ "resume/" | relURL }}">Experience &amp; skills</a></h2>
-        <p>A web-first résumé scaffold, ready for the full story.</p>
-      </div>
-      <a class="card-link" href="{{ "resume/" | relURL }}">Open résumé <span aria-hidden="true">→</span></a>
-    </article>
-
-    <article class="home-card">
-      <p class="card-label">Notes</p>
-      <div class="home-card-body">
-        <h2><a href="{{ "notes/" | relURL }}">Ideas along the way</a></h2>
-        <p>Short notes on building, design, and things worth keeping.</p>
-      </div>
-      <a class="card-link" href="{{ "notes/" | relURL }}">Browse notes <span aria-hidden="true">→</span></a>
-    </article>
   </section>
+
+  <nav class="home-paths" aria-label="More about Liam">
+    <a class="home-path" href="{{ "resume/" | relURL }}">
+      <div>
+        <h2>Résumé</h2>
+        <p>Experience, skills, and the work that shaped them.</p>
+      </div>
+      <span aria-hidden="true">→</span>
+    </a>
+    <a class="home-path" href="{{ "notes/" | relURL }}">
+      <div>
+        <h2>Notes</h2>
+        <p>Ideas from building, learning, and tinkering along the way.</p>
+      </div>
+      <span aria-hidden="true">→</span>
+    </a>
+  </nav>
 {{ end }}

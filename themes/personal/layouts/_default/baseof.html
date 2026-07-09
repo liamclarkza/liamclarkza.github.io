@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="{{ site.Language.Locale }}" data-theme="light">
+<html lang="{{ site.Language.Locale }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f8f8fb">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#111421">
   <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   <link rel="canonical" href="{{ .Permalink }}">
@@ -12,13 +12,6 @@
     {{ $styles := . | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
   {{ end }}
-  <script>
-    (function () {
-      var saved = localStorage.getItem('theme');
-      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.dataset.theme = theme;
-    }());
-  </script>
 </head>
 <body class="{{ if .IsHome }}home{{ else }}page page-{{ .Section | default "standard" }}{{ end }}">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -26,10 +19,6 @@
   <div class="site-frame">
     <aside class="site-sidebar">
       <div class="sidebar-top">
-        <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="Liam Clark, home">
-          <span class="brand-mark" aria-hidden="true">LC</span>
-          <span class="brand-copy"><strong>Liam Clark</strong><small>Personal site</small></span>
-        </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
           <span></span><span></span><span></span>
           <span class="sr-only">Open navigation</span>
@@ -53,12 +42,11 @@
           <span class="nav-icon" aria-hidden="true">↗</span>
           <span>GitHub</span>
         </a>
+        <a href="{{ site.Params.linkedin }}" rel="me">
+          <span class="nav-icon" aria-hidden="true">↗</span>
+          <span>LinkedIn</span>
+        </a>
 
-        <div class="sidebar-divider"></div>
-        <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch theme">
-          <span class="nav-icon theme-symbol" aria-hidden="true">◐</span>
-          <span>Switch theme</span>
-        </button>
       </nav>
     </aside>
 
@@ -68,7 +56,7 @@
       </main>
 
       <footer class="site-footer">
-        <p>Built with care in South Africa.</p>
+        <p>Built in Cape Town, South Africa.</p>
         <div class="footer-links">
           <a href="{{ site.Params.github }}" rel="me">GitHub</a>
           <span aria-hidden="true">·</span>

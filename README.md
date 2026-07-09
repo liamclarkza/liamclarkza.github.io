@@ -1,37 +1,26 @@
 # liamjamesclark.com
 
-Liam Clark's personal site, built with Hugo and deployed to GitHub Pages.
+Source for [liamjamesclark.com](https://liamjamesclark.com/), my personal website for projects, notes, and a web-first résumé.
 
-## Run locally
+The site is intentionally small and static. It is built with [Hugo](https://gohugo.io/) using a custom theme, and deployed to GitHub Pages.
+
+## Local development
+
+Run the Hugo development server:
 
 ```sh
 hugo server --buildDrafts
 ```
 
-Open `http://localhost:1313/`.
+The local site will be available at [localhost:1313](http://localhost:1313/).
 
-## Add content
+## Content
 
-- Projects: add Markdown files in `content/projects/`
-- Notes: add Markdown files in `content/notes/`
-- Résumé: edit `content/resume.md`
-- Homepage: edit `themes/personal/layouts/index.html`
-- Theme: edit `themes/personal/assets/css/main.css`
+- Projects live in `content/projects/`
+- Notes live in `content/notes/`
+- Résumé content lives in `content/resume.md`
+- The custom theme lives in `themes/personal/`
 
-## GitHub Pages
+## Deployment
 
-The workflow at `.github/workflows/hugo.yml` builds and deploys the site whenever `main` changes. In the repository's **Settings → Pages**, set the source to **GitHub Actions** and set the custom domain to `liamjamesclark.com`.
-
-## Cloudflare DNS
-
-Create these DNS-only records in Cloudflare:
-
-| Type | Name | Target |
-| --- | --- | --- |
-| A | `@` | `185.199.108.153` |
-| A | `@` | `185.199.109.153` |
-| A | `@` | `185.199.110.153` |
-| A | `@` | `185.199.111.153` |
-| CNAME | `www` | `liamclarkza.github.io` |
-
-Remove conflicting `@` or `www` records first. Once GitHub has issued the certificate, enable **Enforce HTTPS** in **Settings → Pages**. DNS changes and certificate issuance can take time.
+Changes pushed to `main` are built and deployed to GitHub Pages by the workflow in `.github/workflows/hugo.yml`.

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f7f6fb">
+  <meta name="theme-color" content="#f8f8fb">
   <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   <link rel="canonical" href="{{ .Permalink }}">
@@ -22,45 +22,62 @@
 </head>
 <body class="{{ if .IsHome }}home{{ else }}page page-{{ .Section | default "standard" }}{{ end }}">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="Liam Clark, home">
-        <span class="brand-mark" aria-hidden="true">LC</span>
-        <span>Liam Clark</span>
-      </a>
 
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span></span><span></span><span></span>
-        <span class="sr-only">Open navigation</span>
-      </button>
+  <div class="site-frame">
+    <aside class="site-sidebar">
+      <div class="sidebar-top">
+        <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="Liam Clark, home">
+          <span class="brand-mark" aria-hidden="true">LC</span>
+          <span class="brand-copy"><strong>Liam Clark</strong><small>Personal site</small></span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span></span><span></span><span></span>
+          <span class="sr-only">Open navigation</span>
+        </button>
+      </div>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <p class="nav-section first">Explore</p>
         {{ range site.Menus.main }}
           {{ $active := or ($.IsMenuCurrent .Menu .) ($.HasMenuCurrent .Menu .) }}
-          <a href="{{ .URL }}"{{ if $active }} class="active" aria-current="page"{{ end }}>{{ .Name }}</a>
+          <a href="{{ .URL }}"{{ if $active }} class="active" aria-current="page"{{ end }}>
+            <span class="nav-icon" aria-hidden="true">
+              {{- if eq .Name "Home" }}⌂{{ else if eq .Name "Projects" }}◇{{ else if eq .Name "Résumé" }}≡{{ else }}✎{{ end -}}
+            </span>
+            <span>{{ .Name }}</span>
+          </a>
         {{ end }}
-        <a class="nav-github" href="{{ site.Params.github }}" rel="me">GitHub <span aria-hidden="true">↗</span></a>
+
+        <p class="nav-section">Elsewhere</p>
+        <a href="{{ site.Params.github }}" rel="me">
+          <span class="nav-icon" aria-hidden="true">↗</span>
+          <span>GitHub</span>
+        </a>
+
+        <div class="sidebar-divider"></div>
         <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch theme">
-          <span class="theme-symbol" aria-hidden="true">◐</span>
+          <span class="nav-icon theme-symbol" aria-hidden="true">◐</span>
+          <span>Switch theme</span>
         </button>
       </nav>
-    </div>
-  </header>
+    </aside>
 
-  <main id="main-content">
-    {{ block "main" . }}{{ end }}
-  </main>
+    <div class="site-canvas">
+      <main id="main-content">
+        {{ block "main" . }}{{ end }}
+      </main>
 
-  <footer class="site-footer">
-    <div class="shell footer-inner">
-      <p>Built with care in South Africa.</p>
-      <div class="footer-links">
-        <a href="{{ site.Params.github }}" rel="me">GitHub</a>
-        <span aria-hidden="true">·</span>
-        <span>© {{ now.Year }} Liam Clark</span>
-      </div>
+      <footer class="site-footer">
+        <p>Built with care in South Africa.</p>
+        <div class="footer-links">
+          <a href="{{ site.Params.github }}" rel="me">GitHub</a>
+          <span aria-hidden="true">·</span>
+          <span>© {{ now.Year }} Liam Clark</span>
+        </div>
+      </footer>
     </div>
-  </footer>
+  </div>
+
   <script src="{{ "js/site.js" | relURL }}" defer></script>
 </body>
 </html>
